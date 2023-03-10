@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Gas Provider</string>
+    <string name="nave_home_title">Home</string>
+    <string name="nave_receipts_title">Receipts</string>
+    <string name="nave_customers_title">Customers</string>
+    <string name="nave_setting_title">Setting</string>
+    <string name="receipt_unit">%1$s Kg</string>
+    <string name="kg">Kg</string>
+    <string name="nis">NIS</string>
+    <string name="receipt_currency">%1$s NIS</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_are_you_sure">Are you sure ?</string>
+    <string name="dialog_delete_item_details">You are about to delete current item. Are you sure you want to continue ?</string>
+    <string name="item_saved">Item saved successfully</string>
+    <string name="add_new_customer_title">Add New Customer</string>
+    <string name="update_customer_title">Update Customer Data</string>
+    <string name="first_name_title">First Name</string>
+    <string name="last_name_title">Last Name</string>
+    <string name="error_name_message">Enter valid name</string>
+    <string name="button_save_title">Save</string>
+
+    <string name="add_new_receipt_title">Add New Receipt</string>
+    <string name="update_receipt_title">Update Receipt Data</string>
+    <string name="receipt_full_name_label">Customer Name</string>
+    <string name="receipt_amount_label">Gas amount</string>
+    <string name="receipt_cash_payment_label">Cash payment</string>
+    <string name="receipt_remaining_payment_label">Remaining payment</string>
+
+    <string name="home_total_amount">Total amount</string>
+    <string name="home_total_cash">Total cash payment</string>
+    <string name="home_total_remaining">Total remaining payment</string>
+    <string name="search">Search</string>
+    <string name="customer_item_last_activity">Recent activity: %1$s</string>
+</resources>

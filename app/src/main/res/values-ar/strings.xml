@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">مزود غاز</string>
+    <string name="nave_home_title">الرئيسية</string>
+    <string name="nave_receipts_title">الحركات</string>
+    <string name="nave_customers_title">المستفيدين</string>
+    <string name="nave_setting_title">الاعدادات</string>
+    <string name="receipt_unit">%1$s كيلو</string>
+    <string name="kg">كيلو</string>
+    <string name="nis">شيكل</string>
+    <string name="receipt_currency">%1$s شيكل</string>
+    <string name="dialog_yes">نعم</string>
+    <string name="dialog_cancel">الغاء</string>
+    <string name="dialog_are_you_sure">هل انت متأكد ؟</string>
+    <string name="dialog_delete_item_details">انت على وشك حذف هذا العنصر، هل تريد الاستمرار ؟</string>
+    <string name="item_saved">تم حفظ العنصر بنجاح</string>
+    <string name="add_new_customer_title">إضافة مستفيد جديد</string>
+    <string name="update_customer_title">تحديث بيانات المستفيد</string>
+    <string name="first_name_title">الاسم الاول</string>
+    <string name="last_name_title">العائلة</string>
+    <string name="error_name_message">ادخل اسم صحيح</string>
+    <string name="button_save_title">حفظ</string>
+
+    <string name="add_new_receipt_title">إضافة حركة جديدة</string>
+    <string name="update_receipt_title">تحديث بيانات الحركة</string>
+    <string name="receipt_full_name_label">اسم المستفيد</string>
+    <string name="receipt_amount_label">كمية الغاز</string>
+    <string name="receipt_cash_payment_label">الدفع نقدا</string>
+    <string name="receipt_remaining_payment_label">المبلغ المتبقي</string>
+
+    <string name="home_total_amount">اجمالي الكمية</string>
+    <string name="home_total_cash">اجمالي الدفعات النقدية</string>
+    <string name="home_total_remaining">اجمالي المبلغ المتبقي</string>
+    <string name="search">بحث</string>
+    <string name="customer_item_last_activity">اخر نشاط: %1$s</string>
+</resources>
