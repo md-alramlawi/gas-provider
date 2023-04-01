@@ -15,20 +15,24 @@ class CustomersViewModel @Inject constructor(
 ) : ViewModel() {
 
 
+    private var _screenState: MutableStateFlow<ScreenState> = MutableStateFlow(ScreenState())
+    val screenState: StateFlow<ScreenState> get() = _screenState
+
+
     private val _searchQuery: MutableStateFlow<String> = MutableStateFlow("")
     val searchQuery: StateFlow<String> get() = _searchQuery
 
-    val state: StateFlow<State> = _searchQuery.combine(customerRepository.customersStream){query, customers ->
-        State(
-            customers = customers.filter { it.fullName.lowercase().contains(query.lowercase()) },
-            loading = false
-        )
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), State())
+    val listState: StateFlow<List<CustomerEntity>> = _searchQuery.combine(customerRepository.customersStream){ query, customers ->
+        customers.filter { it.fullName.lowercase().contains(query.lowercase()) }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
 
 
     fun deleteCustomer(customer: CustomerEntity){
         viewModelScope.launch {
+            _screenState.update { it.copy(loading = true) }
             customerRepository.deleteCustomer(customer.id)
+            _screenState.update { it.copy(loading = false) }
+
         }
     }
 
@@ -39,9 +43,8 @@ class CustomersViewModel @Inject constructor(
     }
 
 
-    data class State(
-        val customers: List<CustomerEntity> = emptyList(),
+    data class ScreenState(
         val isAdmin: Boolean = true,
-        val loading: Boolean = true
+        val loading: Boolean = false
     )
 }

@@ -27,42 +27,41 @@ fun HomeScreen(
 ) {
 
     val state by viewModel.state.collectAsState()
+    val screenState by viewModel.screenState.collectAsState()
 
     val scaffoldState = rememberScaffoldState()
 
-    Scaffold(
-        floatingActionButton = {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                FloatingActionButton(
-                    onClick = { navController.navigateToAddEditCustomer(null) },
-                    backgroundColor = MaterialTheme.colors.primary
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_add_person),
-                        contentDescription = "",
-                        tint = MaterialTheme.colors.onPrimary
-                    )
+    Screen(isLoading = screenState.loading) {
+
+        Scaffold(
+            floatingActionButton = {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FloatingActionButton(
+                        onClick = { navController.navigateToAddEditCustomer(null) },
+                        backgroundColor = MaterialTheme.colors.primary
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_add_person),
+                            contentDescription = "",
+                            tint = MaterialTheme.colors.onPrimary
+                        )
+                    }
+
+                    FloatingActionButton(
+                        onClick = { navController.navigateToAddEditReceipt(null) },
+                        backgroundColor = MaterialTheme.colors.primaryVariant
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_add_receipt),
+                            contentDescription = "",
+                            tint = MaterialTheme.colors.onPrimary
+                        )
+                    }
                 }
 
-                FloatingActionButton(
-                    onClick = { navController.navigateToAddEditReceipt(null) },
-                    backgroundColor = MaterialTheme.colors.primaryVariant
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_add_receipt),
-                        contentDescription = "",
-                        tint = MaterialTheme.colors.onPrimary
-                    )
-                }
-            }
-
-        },
-        scaffoldState = scaffoldState
-    ) { padding ->
-
-        if (state.loading)
-            LoadingItem()
-        else
+            },
+            scaffoldState = scaffoldState
+        ) { padding ->
 
             ReceiptsContent(
                 modifier = Modifier.padding(padding),
@@ -70,10 +69,11 @@ fun HomeScreen(
                 totalAmount = state.totalAmount,
                 totalCash = state.totalCash,
                 totalRemaining = state.totalRemaining,
-                editable = state.isAdmin,
+                editable = screenState.isAdmin,
                 onClickEdit = { navController.navigateToAddEditReceipt(it) },
                 onDelete = viewModel::deleteReceipt
             )
+        }
     }
 }
 

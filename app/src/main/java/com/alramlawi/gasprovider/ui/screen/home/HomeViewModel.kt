@@ -6,10 +6,7 @@ import com.alramlawi.gasprovider.data.local.room.entity.ReceiptEntity
 import com.alramlawi.gasprovider.data.repository.receipt.ReceiptRepository
 import com.alramlawi.gasprovider.utils.days
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -20,6 +17,9 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
 
+    private var _screenState: MutableStateFlow<ScreenState> = MutableStateFlow(ScreenState())
+    val screenState: StateFlow<ScreenState> get() = _screenState
+
     val state: StateFlow<State> = receiptRepository.receiptStream.map { list ->
         val todayReceipts = list.filter { Date().days == it.date.days }
         State(
@@ -27,14 +27,21 @@ class HomeViewModel @Inject constructor(
             totalAmount = todayReceipts.sumOf { it.amount },
             totalCash = todayReceipts.sumOf { it.cashPayment },
             totalRemaining = todayReceipts.sumOf { it.remainingPayment },
-            loading = false
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), State())
 
 
-    fun deleteReceipt(receipt: ReceiptEntity){
+    init {
         viewModelScope.launch {
+            receiptRepository.refresh()
+        }
+    }
+
+    fun deleteReceipt(receipt: ReceiptEntity) {
+        viewModelScope.launch {
+            _screenState.update { it.copy(loading = true) }
             receiptRepository.deleteReceipt(receipt.id)
+            _screenState.update { it.copy(loading = false) }
         }
     }
 
@@ -43,7 +50,10 @@ class HomeViewModel @Inject constructor(
         val totalAmount: Double = 0.0,
         val totalCash: Double = 0.0,
         val totalRemaining: Double = 0.0,
+    )
+
+    data class ScreenState(
         val isAdmin: Boolean = true,
-        val loading:Boolean = true,
+        val loading: Boolean = false,
     )
 }

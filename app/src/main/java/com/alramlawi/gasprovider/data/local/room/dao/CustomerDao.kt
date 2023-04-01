@@ -25,4 +25,7 @@ interface CustomerDao {
 
     @Query("DELETE FROM customer_entity WHERE id = :id")
     suspend fun deleteCustomerById(id: String)
+
+    @Query("DELETE FROM customer_entity")
+    suspend fun deleteAll()
 }

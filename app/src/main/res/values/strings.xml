@@ -16,6 +16,8 @@
     <string name="add_new_customer_title">Add New Customer</string>
     <string name="update_customer_title">Update Customer Data</string>
     <string name="first_name_title">First Name</string>
+    <string name="id_number_title">ID Number</string>
+    <string name="mobile_number_title">Mobile Number</string>
     <string name="last_name_title">Last Name</string>
     <string name="error_name_message">Enter valid name</string>
     <string name="button_save_title">Save</string>
@@ -32,4 +34,7 @@
     <string name="home_total_remaining">Total remaining payment</string>
     <string name="search">Search</string>
     <string name="customer_item_last_activity">Recent activity: %1$s</string>
+
+    <string name="alert_dialog_error_title">Error</string>
+    <string name="alert_dialog_dismiss_button">Dismiss</string>
 </resources>

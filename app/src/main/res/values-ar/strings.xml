@@ -17,6 +17,8 @@
     <string name="update_customer_title">تحديث بيانات المستفيد</string>
     <string name="first_name_title">الاسم الاول</string>
     <string name="last_name_title">العائلة</string>
+    <string name="id_number_title">رقم الهوية</string>
+    <string name="mobile_number_title">رقم الهاتف</string>
     <string name="error_name_message">ادخل اسم صحيح</string>
     <string name="button_save_title">حفظ</string>
 
@@ -32,4 +34,7 @@
     <string name="home_total_remaining">اجمالي المبلغ المتبقي</string>
     <string name="search">بحث</string>
     <string name="customer_item_last_activity">اخر نشاط: %1$s</string>
+
+    <string name="alert_dialog_error_title">خطأ</string>
+    <string name="alert_dialog_dismiss_button">انهاء</string>
 </resources>

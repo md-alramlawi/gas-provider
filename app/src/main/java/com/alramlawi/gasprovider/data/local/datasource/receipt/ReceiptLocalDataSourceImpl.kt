@@ -6,7 +6,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withContext
 
 class ReceiptLocalDataSourceImpl(
@@ -28,4 +27,8 @@ class ReceiptLocalDataSourceImpl(
 
     override suspend fun deleteReceipt(id: String) =
         withContext(ioDispatcher) { receiptDao.deleteReceiptById(id) }
+
+    override suspend fun deleteAll() {
+        withContext(ioDispatcher) { receiptDao.deleteAll() }
+    }
 }

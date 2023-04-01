@@ -16,10 +16,7 @@ import com.alramlawi.gasprovider.R
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.alramlawi.gasprovider.data.local.room.entity.CustomerEntity
-import com.alramlawi.gasprovider.ui.composable.CustomerItem
-import com.alramlawi.gasprovider.ui.composable.DeletableItem
-import com.alramlawi.gasprovider.ui.composable.LoadingItem
-import com.alramlawi.gasprovider.ui.composable.SearchBarItem
+import com.alramlawi.gasprovider.ui.composable.*
 import com.alramlawi.gasprovider.ui.screen.add_edit_customer.navigateToAddEditCustomer
 import com.alramlawi.gasprovider.ui.screen.customer_data.navigateToCustomerData
 
@@ -30,22 +27,22 @@ fun CustomersScreen(
     viewModel: CustomersViewModel = hiltViewModel()
 ) {
 
-    val state by viewModel.state.collectAsState()
+    val listState by viewModel.listState.collectAsState()
+    val screenState by viewModel.screenState.collectAsState()
     val searchQuery by viewModel.searchQuery.collectAsState()
 
-    if (state.loading)
-        LoadingItem()
-    else
+    Screen(isLoading = screenState.loading) {
 
         CustomersContent(
-            customers = state.customers,
-            editable = state.isAdmin,
+            customers = listState,
+            editable = screenState.isAdmin,
             onSearch = viewModel::filterCustomers,
             searchQuery = searchQuery,
             onClickItem = { navController.navigateToCustomerData(it) },
             onClickEdit = { navController.navigateToAddEditCustomer(it) },
             onDelete = viewModel::deleteCustomer
         )
+    }
 
 }
 

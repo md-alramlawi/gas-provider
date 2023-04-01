@@ -1,5 +1,6 @@
 package com.alramlawi.gasprovider.data.repository.receipt
 
+import com.alramlawi.gasprovider.data.Result
 import com.alramlawi.gasprovider.data.local.room.entity.ReceiptEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -14,15 +15,22 @@ class FakeReceiptRepository : ReceiptRepository {
         return receiptsData[id]
     }
 
-    override suspend fun addReceipt(receiptEntity: ReceiptEntity) {
+    override suspend fun addReceipt(receiptEntity: ReceiptEntity): Result<Unit> {
         receiptsData[receiptEntity.id] = receiptEntity
+        return Result.Success(Unit)
     }
 
-    override suspend fun updateReceipt(receiptEntity: ReceiptEntity) {
+    override suspend fun updateReceipt(receiptEntity: ReceiptEntity): Result<Unit> {
         receiptsData[receiptEntity.id] = receiptEntity
+        return Result.Success(Unit)
     }
 
-    override suspend fun deleteReceipt(id: String) {
+    override suspend fun deleteReceipt(id: String): Result<Unit> {
         receiptsData.remove(id)
+        return Result.Success(Unit)
+    }
+
+    override suspend fun refresh() {
+        TODO("Not yet implemented")
     }
 }

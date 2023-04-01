@@ -18,4 +18,6 @@ interface CustomerLocalDataSource {
     suspend fun updateActivityLastDate(id: String)
 
     suspend fun deleteCustomer(id: String)
+
+    suspend fun deleteAll()
 }

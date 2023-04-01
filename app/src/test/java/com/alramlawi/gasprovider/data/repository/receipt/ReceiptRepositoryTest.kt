@@ -7,7 +7,6 @@ import com.alramlawi.gasprovider.data.local.datasource.receipt.FakeReceiptLocalD
 import com.alramlawi.gasprovider.data.local.datasource.receipt.ReceiptLocalDataSource
 import com.alramlawi.gasprovider.data.local.room.entity.CustomerEntity
 import com.alramlawi.gasprovider.data.local.room.entity.ReceiptEntity
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runBlockingTest
@@ -18,7 +17,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import java.util.*
-import kotlin.collections.LinkedHashMap
 
 @ExperimentalCoroutinesApi
 class ReceiptRepositoryTest {
@@ -59,7 +57,7 @@ class ReceiptRepositoryTest {
     fun setUp() {
         receiptLocalDataSource = FakeReceiptLocalDataSource(receiptsData)
         customerLocalDataSource = FakeCustomerLocalDataSource(customersData)
-        receiptRepository = ReceiptRepositoryImpl(receiptLocalDataSource, customerLocalDataSource, Dispatchers.Main)
+//        receiptRepository = ReceiptRepositoryImpl(receiptLocalDataSource, customerLocalDataSource, Dispatchers.Main)
     }
 
     @Test

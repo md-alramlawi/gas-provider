@@ -26,8 +26,16 @@ class FakeCustomerLocalDataSource(private val customersData: LinkedHashMap<Strin
         customersData[customerEntity.id] = customerEntity
     }
 
+    override suspend fun updateActivityLastDate(id: String) {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun deleteCustomer(id: String) {
         customersData.remove(id)
+    }
+
+    override suspend fun deleteAll() {
+        TODO("Not yet implemented")
     }
 
 }

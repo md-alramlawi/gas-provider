@@ -21,6 +21,7 @@ import androidx.navigation.NavController
 import com.alramlawi.gasprovider.R
 import com.alramlawi.gasprovider.data.local.room.entity.CustomerEntity
 import com.alramlawi.gasprovider.ui.composable.AutoCompleteTextField
+import com.alramlawi.gasprovider.ui.composable.Screen
 import com.alramlawi.gasprovider.ui.composable.SimpleTextField
 
 @Composable
@@ -32,20 +33,23 @@ fun AddEditReceiptScreen(
     val context = LocalContext.current
     val state by viewModel.state.collectAsState()
 
-    AddEditReceiptContent(
-        isNewReceipt = state.receipt == null,
-        customers = state.customers,
-        customer = state.fullName to state.customerError,
-        amount = state.amount to state.amountError,
-        cashPayment = state.cashPayment to state.cashError,
-        remainingPayment = state.remainingPayment to state.remindingError,
-        onPickCustomer = viewModel::selectCustomer,
-        onNameChanged = viewModel::onNameChanged,
-        onAmountChanged = viewModel::onAmountChanged,
-        onCashPaymentChanged = viewModel::onCashPaymentChanged,
-        onRemainingPaymentChanged = viewModel::onRemindingPaymentChanged,
-        onClickSave = viewModel::saveReceipt
-    )
+    Screen(isLoading = state.loading) {
+
+        AddEditReceiptContent(
+            isNewReceipt = state.receipt == null,
+            customers = state.customers,
+            customer = state.fullName to state.customerError,
+            amount = state.amount to state.amountError,
+            cashPayment = state.cashPayment to state.cashError,
+            remainingPayment = state.remainingPayment to state.remindingError,
+            onPickCustomer = viewModel::selectCustomer,
+            onNameChanged = viewModel::onNameChanged,
+            onAmountChanged = viewModel::onAmountChanged,
+            onCashPaymentChanged = viewModel::onCashPaymentChanged,
+            onRemainingPaymentChanged = viewModel::onRemindingPaymentChanged,
+            onClickSave = viewModel::saveReceipt
+        )
+    }
 
 
     LaunchedEffect(key1 = state.saveComplete) {

@@ -25,4 +25,8 @@ class FakeReceiptLocalDataSource(private val receiptsData: LinkedHashMap<String,
         receiptsData.remove(id)
     }
 
+    override suspend fun deleteAll() {
+        TODO("Not yet implemented")
+    }
+
 }

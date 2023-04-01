@@ -14,4 +14,6 @@ interface ReceiptLocalDataSource {
     suspend fun updateReceipt(receiptEntity: ReceiptEntity)
 
     suspend fun deleteReceipt(id: String)
+
+    suspend fun deleteAll()
 }

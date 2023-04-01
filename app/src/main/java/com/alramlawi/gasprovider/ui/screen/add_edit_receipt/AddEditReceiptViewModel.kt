@@ -3,6 +3,7 @@ package com.alramlawi.gasprovider.ui.screen.add_edit_receipt
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alramlawi.gasprovider.data.Result
 import com.alramlawi.gasprovider.data.local.room.entity.CustomerEntity
 import com.alramlawi.gasprovider.data.local.room.entity.ReceiptEntity
 import com.alramlawi.gasprovider.data.repository.customer.CustomerRepository
@@ -125,7 +126,8 @@ class AddEditReceiptViewModel @Inject constructor(
                     return@launch
                 }
 
-                receipt?.let {
+                _state.update { it.copy(loading = true) }
+                val remoteResult = receipt?.let {
                     receiptRepository.updateReceipt(
                         it.copy(
                             customerId = selectedCustomer!!.id,
@@ -145,22 +147,23 @@ class AddEditReceiptViewModel @Inject constructor(
                     )
                 )
 
+                _state.update { it.copy(loading = false) }
+                if (remoteResult is Result.Success)
+                    _state.update {
+                        it.copy(
+                            fullName = "",
+                            amount = "",
+                            cashPayment = "",
+                            remainingPayment = "",
+                            saveComplete = true
+                        )
+                    }
             }
-
-            _state.emit(
-                _state.value.copy(
-                    fullName = "",
-                    amount = "",
-                    cashPayment = "",
-                    remainingPayment = "",
-                    saveComplete = true
-                )
-            )
-
         }
     }
 
     data class State(
+        val loading: Boolean = false,
         val customers: List<CustomerEntity> = emptyList(),
         val receipt: ReceiptEntity? = null,
         val selectedCustomer: CustomerEntity? = null,

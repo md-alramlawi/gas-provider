@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alramlawi.gasprovider.R
 
@@ -44,7 +45,9 @@ fun <T> DeletableItem(
 
             ) {
                 Icon(
-                    modifier = Modifier.padding(end = 16.dp).size(32.dp),
+                    modifier = Modifier
+                        .padding(end = 16.dp)
+                        .size(32.dp),
                     imageVector = Icons.Default.Delete,
                     tint = MaterialTheme.colors.error,
                     contentDescription = ""
@@ -112,6 +115,19 @@ fun ConfirmationDialog(
                     color = MaterialTheme.colors.onBackground
                 )
             }
-        }
+        },
+        shape = MaterialTheme.shapes.medium
+    )
+}
+
+
+@Preview
+@Composable
+fun PreviewConfirmationDialog() {
+    ConfirmationDialog(
+        title = stringResource(id = R.string.dialog_are_you_sure),
+        details = stringResource(id = R.string.dialog_delete_item_details),
+        onDismiss = {},
+        onConfirm = {}
     )
 }

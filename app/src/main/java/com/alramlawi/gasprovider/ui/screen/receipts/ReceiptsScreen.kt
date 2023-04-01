@@ -12,10 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.alramlawi.gasprovider.data.local.room.entity.ReceiptEntity
-import com.alramlawi.gasprovider.ui.composable.DeletableItem
-import com.alramlawi.gasprovider.ui.composable.EmptyItem
-import com.alramlawi.gasprovider.ui.composable.LoadingItem
-import com.alramlawi.gasprovider.ui.composable.ReceiptItem
+import com.alramlawi.gasprovider.ui.composable.*
 import com.alramlawi.gasprovider.ui.screen.add_edit_receipt.navigateToAddEditReceipt
 
 
@@ -25,17 +22,18 @@ fun ReceiptsScreen(
     viewModel: ReceiptsViewModel = hiltViewModel()
 ) {
 
-    val state by viewModel.state.collectAsState()
+    val listState by viewModel.listState.collectAsState()
+    val screenState by viewModel.screenState.collectAsState()
 
-    if (state.loading)
-        LoadingItem()
-    else
+    Screen(isLoading = screenState.loading) {
         ReceiptsContent(
-            customers = state.receipts,
-            editable = state.isAdmin,
+            customers = listState,
+            editable = screenState.isAdmin,
             onClickEdit = { navController.navigateToAddEditReceipt(it) },
             onDelete = viewModel::deleteReceipt
         )
+    }
+
 }
 
 @Composable

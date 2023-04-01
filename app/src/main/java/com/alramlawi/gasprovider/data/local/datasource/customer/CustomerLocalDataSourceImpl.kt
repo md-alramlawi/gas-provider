@@ -6,7 +6,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withContext
 import java.util.*
 
@@ -36,4 +35,8 @@ class CustomerLocalDataSourceImpl(
 
     override suspend fun deleteCustomer(id: String) =
         withContext(ioDispatcher) { dao.deleteCustomerById(id) }
+
+    override suspend fun deleteAll() {
+        withContext(ioDispatcher) { dao.deleteAll() }
+    }
 }

@@ -22,4 +22,7 @@ interface ReceiptDao {
 
     @Query("DELETE FROM receipt_entity WHERE id = :id")
     suspend fun deleteReceiptById(id: String)
+
+    @Query("DELETE FROM receipt_entity")
+    suspend fun deleteAll()
 }

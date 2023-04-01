@@ -90,5 +90,5 @@ fun CustomerItem(
 @Composable
 fun PreviewCustomerItem() {
     CustomerItem(editable = true,
-        customerEntity = CustomerEntity("Majd", "Alramlawi"), {}, {})
+        customerEntity = CustomerEntity("", "Majd", "Alramlawi",  ""), {}, {})
 }

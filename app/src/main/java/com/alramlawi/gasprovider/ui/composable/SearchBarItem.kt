@@ -1,7 +1,6 @@
 package com.alramlawi.gasprovider.ui.composable
 
 import androidx.compose.foundation.border
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -22,11 +21,11 @@ fun SearchBarItem(
 
     TextField(
         modifier = modifier
-            .clip(RoundedCornerShape(25.dp))
+            .clip(MaterialTheme.shapes.large)
             .border(
                 width = 2.dp,
                 color = MaterialTheme.colors.background,
-                shape = RoundedCornerShape(25.dp)
+                shape = MaterialTheme.shapes.large
             ),
         value = query,
         onValueChange = onQueryChanged,

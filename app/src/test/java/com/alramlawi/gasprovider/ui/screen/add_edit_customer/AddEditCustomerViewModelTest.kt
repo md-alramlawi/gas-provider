@@ -6,6 +6,7 @@ import com.alramlawi.gasprovider.MainCoroutineRule
 import com.alramlawi.gasprovider.data.local.room.entity.CustomerEntity
 import com.alramlawi.gasprovider.data.repository.customer.CustomerRepository
 import com.alramlawi.gasprovider.data.repository.customer.FakeCustomerRepository
+import com.alramlawi.gasprovider.utils.Validator
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.last
@@ -27,6 +28,8 @@ class AddEditCustomerViewModelTest {
 
     private lateinit var savedStateHandle: SavedStateHandle
 
+    private lateinit var validator: Validator
+
     @ExperimentalCoroutinesApi
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
@@ -46,6 +49,7 @@ class AddEditCustomerViewModelTest {
             customerRepository.addCustomer(c3)
         }
         savedStateHandle = SavedStateHandle()
+        validator = Validator()
     }
 
 
@@ -58,7 +62,7 @@ class AddEditCustomerViewModelTest {
     @Test
     fun createCustomer_retrievesCustomer()= runBlocking{
 
-        addEditCustomerViewModel = AddEditCustomerViewModel(customerRepository, savedStateHandle)
+        addEditCustomerViewModel = AddEditCustomerViewModel(customerRepository, savedStateHandle, validator)
         addEditCustomerViewModel.onFirstNameChanged("Majd")
         addEditCustomerViewModel.onLastNameChanged("Alramlawi")
 
@@ -72,7 +76,7 @@ class AddEditCustomerViewModelTest {
     fun updateCustomer_retrievesCustomer()= runTest{
         savedStateHandle["item_id"] = "id_1"
         val originalList = customerRepository.customersStream.last()
-        addEditCustomerViewModel = AddEditCustomerViewModel(customerRepository, savedStateHandle)
+        addEditCustomerViewModel = AddEditCustomerViewModel(customerRepository, savedStateHandle, validator)
         addEditCustomerViewModel.onFirstNameChanged("new First name")
 
         assertThat(addEditCustomerViewModel.state.value.saveComplete, `is` (false))
